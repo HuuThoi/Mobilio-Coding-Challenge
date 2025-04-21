@@ -100,24 +100,24 @@ class ProductListScreen extends ConsumerWidget {
             SizedBox(height: 12),
             Expanded(
               child: productsAsync.when(
-                data: (products) => SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
-                  child: DataTable(
-                    columns: const [
-                      DataColumn(label: Text('Name')),
-                      DataColumn(label: Text('Price')),
-                    ],
-                    rows: products
-                        .map(
-                          (p) => DataRow(
-                            cells: [
-                              DataCell(Text(p.name)),
-                              DataCell(Text(p.price.toString())),
-                            ],
-                          ),
-                        )
-                        .toList(),
-                  ),
+                data: (products) => ListView.builder(
+                  itemCount: products.length,
+                  itemBuilder: (context, index) {
+                    final product = products[index];
+                    return Card(
+                      margin: EdgeInsets.symmetric(vertical: 8.0),
+                      elevation: 4.0,
+                      child: ListTile(
+                        leading: Icon(Icons.shopping_bag),
+                        title: Text(product.name),
+                        subtitle: Text('\$${product.price}'),
+                        trailing: Icon(Icons.arrow_forward_ios),
+                        onTap: () {
+                          // Navigate to product details or perform another action
+                        },
+                      ),
+                    );
+                  },
                 ),
                 loading: () => Center(child: CircularProgressIndicator()),
                 error: (error, _) =>

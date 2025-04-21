@@ -19,7 +19,7 @@ product-api/
 ├── src/
 │   ├── config            # Config variables
 │   ├── controllers       # Controllers of app
-│   ├── database          # Setup database
+│   ├── database          # Setup database (using sqlite)
 │   ├── middlewares       # Middleware
 │   ├── routes            # Routes of app
 │   ├── services          # Services work with db
